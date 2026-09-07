@@ -214,7 +214,7 @@ export async function explainMistakes(opts: {
     {
       role: "system" as const,
       content:
-        "You are a friendly, encouraging math tutor. Give concise, specific feedback (2–4 sentences) to help a student understand their mistakes. Be warm, not harsh. Always end with an encouraging note.",
+        "You are a friendly, encouraging educational tutor across all academic subjects (Sciences, Humanities, Mathematics, STEM, Languages, Social Sciences). Give concise, specific feedback (2–4 sentences) to help a student understand their mistakes. Be warm, not harsh. Always end with an encouraging note.",
     },
     {
       role: "user" as const,
@@ -249,14 +249,14 @@ export async function generateStudyContent(opts: {
     {
       role: "system" as const,
       content:
-        "You are an expert curriculum writer and educational content creator for a multi-subject student learning app. Generate comprehensive study notes, summaries, or lesson modules for any given subject (e.g., Mathematics, History, Literature, Science) following this strict structural and formatting standard.\n\n" +
+        "You are an expert curriculum writer and educational content creator for a multi-subject student learning app. Generate comprehensive study notes, summaries, or lesson modules for any given subject (e.g., Biology, Chemistry, Physics, History, Literature, Computer Science, Mathematics) following this strict structural and formatting standard.\n\n" +
         "### Structure Requirements:\n" +
-        "1. **Introduction (1-2 paragraphs):** Define the topic, context, historical background, or core significance.\n" +
-        "2. **Core Concepts / Breakdown:** Break down the topic into logical thematic or chronological subheadings (`###`). Use bullet points for key attributes, dates, characters, formulas, or theorems.\n" +
+        "1. **Introduction (1-2 paragraphs):** Define the topic, context, historical background, biological/scientific mechanisms, or core significance.\n" +
+        "2. **Core Concepts / Breakdown:** Break down the topic into logical thematic subheadings (`###`). Use bullet points for key attributes, mechanisms, dates, characters, formulas, or definitions.\n" +
         "3. **Worked Examples / Case Studies:** \n" +
-        "   - For STEM: Provide step-by-step problem breakdowns (Given, Formula, Solution).\n" +
-        "   - For Humanities/Arts/Languages: Provide textual analysis, case studies, or contextual breakdowns.\n" +
-        "4. **Summary / Quick Reference Table:** Use a clean Markdown table to contrast key terms, dates, formulas, or historical figures.\n" +
+        "   - For STEM & Sciences: Provide step-by-step problem breakdowns, biological processes (e.g., Cellular Respiration steps, Mitosis stages), or scientific principles.\n" +
+        "   - For Humanities/Arts/Languages: Provide textual analysis, case studies, historical timelines, or contextual breakdowns.\n" +
+        "4. **Summary / Quick Reference Table:** Use a clean Markdown table to contrast key terms, structures, formulas, or historical figures.\n" +
         "5. **Actionable Study Tips:** Provide 3-5 concise bullet points advising students on how to memorize, analyze, or practice the concept.\n\n" +
         "### Formatting Rules:\n" +
         "- **Never** output raw, broken symbols or unformatted math/linguistic symbols. Use proper Markdown tables.\n" +
@@ -266,7 +266,7 @@ export async function generateStudyContent(opts: {
     },
     {
       role: "user" as const,
-      content: `Please generate a comprehensive study guide for "${subtopicName}" (part of the subject/topic: ${topicName}) at the ${depthLabel} level. Ensure it strictly follows the requested structure and formatting rules.`,
+      content: `Please generate a comprehensive study guide for "${subtopicName}" (part of the subject/topic: ${topicName}) at the ${depthLabel} level. Ensure it strictly follows the requested structure and formatting rules and is 100% relevant to ${topicName}.`,
     },
   ];
 
@@ -305,29 +305,29 @@ export async function generateCustomTopic(opts: {
 }> {
   const prompt = opts.text
     ? `The user wants to learn about: "${opts.text}"`
-    : "The user uploaded a math problem image and wants to learn the underlying concept.";
+    : "The user uploaded an educational diagram or problem image and wants to learn the underlying subject concept.";
 
   const messages = [
     {
       role: "system" as const,
       content:
-        "You are a math curriculum designer. Create a focused math topic with subtopics based on user input. Return ONLY valid JSON, no extra text.",
+        "You are an expert curriculum designer across all academic subjects (e.g. Biology, Chemistry, Physics, History, Literature, Computer Science, Economics, Mathematics). Create a focused learning topic with 3-5 subtopics strictly tailored to the user's requested subject (e.g. for Biology: Cell Structure, Tissues, Organ Systems; for Physics: Motion, Forces, Energy; for World History: Ancient Empires, Renaissance, Industrial Revolution). Do NOT output generic math or probability unless the user explicitly requested Mathematics. Return ONLY valid JSON, no extra text.",
     },
     {
       role: "user" as const,
       content: `${prompt}
 
-Create a math learning topic with 3-5 subtopics. Return ONLY this JSON structure:
+Create a structured educational topic with 3-5 subtopics strictly relevant to this subject. Return ONLY this JSON structure:
 {
   "topic": {
-    "name": "string",
+    "name": "string — e.g. Biology, Cell Biology, World History, Organic Chemistry",
     "slug": "lowercase-hyphenated-slug",
-    "description": "string — 1-2 sentences",
+    "description": "string — 1-2 concise summary sentences about this subject",
     "color": "#hexcolor"
   },
   "subtopics": [
     {
-      "name": "string",
+      "name": "string — specific subtopic relevant to the main subject",
       "slug": "lowercase-hyphenated-slug",
       "depth": "core" | "intermediate" | "advanced",
       "order_index": 0
@@ -349,7 +349,7 @@ Create a math learning topic with 3-5 subtopics. Return ONLY this JSON structure
   const topicId = `custom-${Date.now()}`;
   const topic = {
     id: topicId,
-    name: parsed.topic?.name ?? "Custom Topic",
+    name: parsed.topic?.name ?? "Custom Subject",
     slug: parsed.topic?.slug ?? `custom-${Date.now()}`,
     description: parsed.topic?.description ?? "",
     color: parsed.topic?.color ?? "#6366F1",
@@ -388,20 +388,26 @@ export async function generateQuizQuestions(opts: {
     {
       role: "system" as const,
       content:
-        "You are an expert math question writer. Generate multiple-choice questions in valid JSON. Return ONLY a JSON object containing a 'questions' array — no extra text, no markdown fences.",
+        "You are an expert academic question writer across all disciplines (Biology, Chemistry, Physics, History, Literature, Computer Science, Mathematics, etc.). Generate accurate multiple-choice questions in valid JSON. Questions MUST be strictly relevant to the specific subject and subtopic provided. Return ONLY a JSON object containing a 'questions' array — no extra text, no markdown fences.",
     },
     {
       role: "user" as const,
-      content: `Generate exactly ${count} multiple-choice math questions about "${subtopicName}" (part of ${topicName}) at the ${depthLabel} level.
+      content: `Generate exactly ${count} multiple-choice questions about "${subtopicName}" (part of the subject/topic: ${topicName}) at the ${depthLabel} level.
+
+CRITICAL DIRECTIVE:
+All questions MUST be directly about "${subtopicName}" in "${topicName}".
+- For Biology (e.g. Cells, Tissues, Genetics): Ask about cell organelles (mitochondria, nucleus), cell membrane transport, tissue types (epithelial, muscle), or biological processes. Do NOT ask probability, algebra, or math questions.
+- For History: Ask about events, dates, historical figures, or causes/effects.
+- For Physics/Chemistry: Ask about physical laws, elements, reactions, forces, or principles.
 
 Return ONLY a JSON object with this exact structure:
 {
   "questions": [
     {
-      "question": "string — the question text",
-      "options": ["A text", "B text", "C text", "D text"],
+      "question": "string — clear, domain-accurate question text",
+      "options": ["Option A", "Option B", "Option C", "Option D"],
       "correctIndex": 0,
-      "explanation": "string — brief explanation of the correct answer"
+      "explanation": "string — brief, clear explanation of why this answer is correct"
     }
   ]
 }
@@ -409,9 +415,9 @@ Return ONLY a JSON object with this exact structure:
 Rules:
 - Each question must have exactly 4 options
 - correctIndex is 0-based (0=A, 1=B, 2=C, 3=D)
-- Questions must be mathematically accurate
-- Vary the question styles (solve, find, identify, calculate)
-- Difficulty should match the ${depthLabel} level
+- Questions must be factually and scientifically accurate for the given subject
+- Vary question styles (identify, analyze, define, compare)
+- Difficulty must match the ${depthLabel} level
 - Do NOT include labels like "A)" in the options array`,
     },
   ];

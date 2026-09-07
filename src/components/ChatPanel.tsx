@@ -88,8 +88,8 @@ export default function ChatPanel({ subtopicId, subtopicName, onClose }: ChatPan
     let fullContent = "";
     
     // Construct messages for Groq API
-    const topicContext = subtopicName ? ` The user is currently studying "${subtopicName}".` : " The user is currently studying a math topic.";
-    const systemPrompt = `You are a helpful, encouraging math tutor.${topicContext} Answer their questions clearly, step-by-step, using LaTeX for math expressions if needed. Be concise.`;
+    const topicContext = subtopicName ? ` The user is currently studying "${subtopicName}".` : " The user is currently studying a learning topic.";
+    const systemPrompt = `You are a helpful, encouraging educational tutor across all academic subjects.${topicContext} Answer their questions clearly, step-by-step, providing clear explanations, diagrams, dates, or LaTeX for math/science equations when applicable. Be concise and engaging.`;
     
     const chatHistory = [
       { role: "system" as const, content: systemPrompt },

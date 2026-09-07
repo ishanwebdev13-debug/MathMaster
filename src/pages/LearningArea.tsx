@@ -580,21 +580,21 @@ export default function LearningArea() {
                 htmlFor="gen-topic-text"
                 className="block text-sm font-medium text-foreground mb-1.5"
               >
-                Paste text about the math topic you want to learn
+                Enter any subject or topic you want to learn
               </label>
               <textarea
                 id="gen-topic-text"
                 value={genText}
                 onChange={(e) => setGenText(e.target.value)}
                 rows={5}
-                placeholder="e.g. I need help with quadratic equations — factoring, the quadratic formula, and graphing parabolas…"
+                placeholder="e.g., Biology (Cell structure, tissues, mitosis) or Organic Chemistry, World History, Quantum Physics, Data Structures…"
                 className="input-base resize-none"
               />
             </div>
           ) : (
             <div>
               <span className="block text-sm font-medium text-foreground mb-1.5">
-                Upload a screenshot of a math problem
+                Upload a screenshot or image of a study concept/problem
               </span>
               <input
                 ref={fileInputRef}

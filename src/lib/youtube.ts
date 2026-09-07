@@ -31,8 +31,8 @@ export async function searchYouTubeVideos(
 ): Promise<YouTubeVideo[]> {
   const key = getYouTubeKey();
 
-  // Add "math tutorial" or "math lesson" to bias results toward educational content
-  const fullQuery = `${query} math tutorial`;
+  // Add "educational lesson" to bias results toward educational content for any subject
+  const fullQuery = `${query} educational lesson`;
 
   const params = new URLSearchParams({
     part: "snippet",
