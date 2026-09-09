@@ -62,7 +62,7 @@ export default function LoginPage() {
         {/* Brand */}
         <div className="text-center mb-8">
           <h1 className="font-heading text-3xl font-bold text-foreground">
-            MathMaster
+            Unlimited
           </h1>
           <p className="font-sans text-sm text-foreground/60 mt-1">
             {isSignUp

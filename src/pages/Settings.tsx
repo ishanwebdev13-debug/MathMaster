@@ -219,7 +219,7 @@ export default function Settings() {
         <div className="flex items-center justify-between py-2">
           <div>
             <p className="font-medium text-foreground">Sign out</p>
-            <p className="text-xs text-foreground/50">You'll need to sign in again to access MathMaster.</p>
+            <p className="text-xs text-foreground/50">You'll need to sign in again to access Unlimited.</p>
           </div>
           <button
             onClick={signOut}

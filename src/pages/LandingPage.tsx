@@ -51,7 +51,7 @@ export default function LandingPage() {
       <nav className="w-full max-w-6xl mx-auto px-6 py-6 flex items-center justify-between relative z-10">
         <div className="flex items-center gap-2">
           <Logo size={32} />
-          <span className="font-heading text-2xl font-bold text-foreground tracking-tight">MathMaster</span>
+          <span className="font-heading text-2xl font-bold text-foreground tracking-tight">Unlimited</span>
         </div>
         <div className="flex items-center gap-4">
           <button
@@ -167,7 +167,7 @@ export default function LandingPage() {
       <section className="py-24 bg-muted/50 border-t border-border">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">Why Choose MathMaster?</h2>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">Why Choose Unlimited?</h2>
             <p className="text-foreground/60 max-w-2xl mx-auto">
               We combine cognitive science with gamification to ensure you not only learn math, but remember it forever.
             </p>

@@ -92,7 +92,7 @@ export default function Header() {
           className="flex items-center gap-2 font-heading text-xl font-bold text-foreground hover:text-primary transition-colors shrink-0"
         >
           <Logo size={28} />
-          MathMaster
+          Unlimited
         </Link>
 
         {/* Center: Nav */}
