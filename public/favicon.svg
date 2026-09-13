@@ -1,0 +1,22 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <ellipse cx="32" cy="32" rx="30" ry="20" fill="#001f3f" />
+  <text
+    x="32"
+    y="34"
+    text-anchor="middle"
+    dominant-baseline="central"
+    fill="#00ff00"
+    font-size="64"
+    font-weight="bold"
+    font-family="system-ui, -apple-system, sans-serif"
+    >
+  >
+    ∞
+  </text>
+  <defs>
+    <linearGradient id="logo-grad" x1="4" y1="4" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4A7CF7" />
+      <stop offset="1" stop-color="#7B5CF7" />
+    </linearGradient>
+  </defs>
+</svg>
